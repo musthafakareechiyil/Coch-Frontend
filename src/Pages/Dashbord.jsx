@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiUsers, FiClipboard, FiCheckCircle, FiDatabase, FiSearch, FiArrowUp, FiArrowDown } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [surveyStatus, setSurveyStatus] = useState({ active: 0, completed: 0, deactivated: 0 });
@@ -54,6 +55,7 @@ const Dashboard = () => {
   const handleIntervalChange = (interval) => {
     setGrowthInterval(interval);
   };
+  const navigate = useNavigate();
 
   const calculateGrowth = () => {
     const entries = Object.entries(surveyGrowth);
@@ -79,8 +81,12 @@ const Dashboard = () => {
     );
   }
 
+  const handleNavigate = (surveyId) => {
+    navigate(`/survey/${surveyId}/kpis`);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6">
+    <div className="min-h-screen bg-gray-50 md:p-1">
       <div className="bg-blue-600 text-white p-2 mb-6 overflow-hidden">
         <div className="animate-marquee whitespace-nowrap">
           {recentActivities.map((activity, index) => (
@@ -91,7 +97,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 md:p-12">
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
@@ -170,7 +176,7 @@ const Dashboard = () => {
 
       {/* Summary Table */}
       <h2 className="text-xl font-semibold text-gray-800 mb-4">Survey Summary</h2>
-      <div className="bg-white rounded-lg shadow p-6 mb-8">
+      <div className="bg-white rounded-lg shadow p-12 mb-8">
 
         <div className="flex justify-between">
           <div className="relative w-full md:w-1/3">
@@ -209,7 +215,7 @@ const Dashboard = () => {
               {filteredAndSortedSurveys.map((survey) => (
                 <tr key={survey.survey_id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 underline cursor-pointer"
-                    // onClick={}
+                    onClick={() => handleNavigate(survey.survey_id)}
                   >
                     {survey.survey_name}
                   </td>
@@ -231,7 +237,7 @@ const Dashboard = () => {
       </div>
 
       {/* Recent Activities */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white rounded-lg shadow p-12">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">Recent Activities</h2>
         <div className="space-y-4">
           {recentActivities.slice(0, 5).map((activity, index) => (
