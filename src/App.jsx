@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate, Link } from 'react-router-dom'
+import { Route, Routes, useNavigate, Link, Navigate } from 'react-router-dom'
 import './App.css'
 import Dashbord from './Pages/Dashbord'
 import Login from './Pages/Login'
@@ -37,7 +37,6 @@ function App() {
               </div>
               
               {/* Logout button (shown only when authenticated) */}
-
               <div className="flex items-center">
                   <button
                     onClick={handleLogout}
@@ -54,6 +53,7 @@ function App() {
         {/* Main Content */}
         <main className="max-w-7xl mx-auto">
           <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
             <Route
               path="/login"
               element={
