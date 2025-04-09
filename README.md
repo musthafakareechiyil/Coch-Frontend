@@ -39,6 +39,8 @@ The app will be running at http://localhost:5173.
 🔐 Authentication
 The app includes a dummy authentication system to simulate user login and session.
 find the email and passoword from seed file of rails server.
+email: user1@example.com
+password: password
 
 🌐 Backend Integration
 Make sure the backend Rails API is running at http://localhost:3000. Currently, the base URL is hardcoded inside the frontend app.
